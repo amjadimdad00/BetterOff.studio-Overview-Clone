@@ -90,12 +90,10 @@ const PricingCard: React.FC<PricingCardProps> = ({ item }) => {
             </svg>
           </a>
 
-          <div
-            className="mt-2 md:mt-0 lg:mt-0.5 xl:mt-2 project-cta cursor-pointer"
-            ref={ctaRef}
-          >
+          <div className="mt-2 md:mt-0 lg:mt-0.5 xl:mt-2 project-cta cursor-pointer">
             <a
               href="/"
+              ref={ctaRef}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[15px] md:text-[10px] lg:text-[11px] xl:text-[15px] 2xl:text-[28px]"

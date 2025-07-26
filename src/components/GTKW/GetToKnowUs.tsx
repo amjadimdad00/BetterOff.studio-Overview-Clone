@@ -13,12 +13,11 @@ const GetToKnowUs = () => {
   const headingRefs = useRef<HTMLDivElement[]>([]);
   const textLinesRefs = useRef<HTMLDivElement[]>([]);
   const coverRefs = useRef<HTMLDivElement[]>([]);
-
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLAnchorElement>(null); // anchor tag because of Link
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    // heading fadeInUp
+    // Animate headings on scroll
     headingRefs.current.forEach((ref) => {
       if (!ref) return;
       gsap.from(ref, {
@@ -34,7 +33,7 @@ const GetToKnowUs = () => {
       });
     });
 
-    // RevealCover + fadeInUp
+    // Reveal text lines with cover animation
     const validLines = textLinesRefs.current.filter(Boolean);
     const covers = coverRefs.current.filter(Boolean);
 
@@ -63,7 +62,7 @@ const GetToKnowUs = () => {
       },
     });
 
-    // Zoom on image hover
+    // Hover zoom effect on image
     const wrapper = imageWrapperRef.current;
     const img = imageRef.current;
     if (!wrapper || !img) return;
@@ -86,10 +85,14 @@ const GetToKnowUs = () => {
 
     wrapper.addEventListener("mouseenter", zoomIn);
     wrapper.addEventListener("mouseleave", zoomOut);
+    wrapper.addEventListener("touchstart", zoomIn);
+    wrapper.addEventListener("touchend", zoomOut);
 
     return () => {
       wrapper.removeEventListener("mouseenter", zoomIn);
       wrapper.removeEventListener("mouseleave", zoomOut);
+      wrapper.removeEventListener("touchstart", zoomIn);
+      wrapper.removeEventListener("touchend", zoomOut);
     };
   }, []);
 
@@ -99,13 +102,11 @@ const GetToKnowUs = () => {
 
   return (
     <div className="bg-[#e5e7df] pb-18 lg:pb-24 2xl:pb-60 selection:!bg-[#1e1e1e] selection:!text-white">
-      {/* HEADER */}
+      {/* Header Section */}
       <div className="mx-3.5 pt-4 md:pt-2 lg:pt-3 xl:pt-6 xl:mx-6 2xl:mx-10 2xl:pt-7 flex flex-col md:flex-row justify-between items-center">
         <div
           className="text-base md:text-[10px] lg:text-sm xl:text-xl 2xl:text-[32px] gap-1 items-center uppercase font-medium text-[#1e1e1e] flex tracking-tight"
-          ref={(el) => {
-            headingRefs.current[0] = el!;
-          }}
+          ref={(el) => {headingRefs.current[0] = el!}}
         >
           <span className="text-3xl md:text-lg lg:text-2xl xl:text-4xl 2xl:text-6xl mb-1 2xl:mb-2">
             ●
@@ -114,9 +115,7 @@ const GetToKnowUs = () => {
         </div>
         <div
           className="tracking-tight"
-          ref={(el) => {
-            headingRefs.current[1] = el!;
-          }}
+          ref={(el) => {headingRefs.current[1] = el!}}
         >
           <h1 className="font-[500] text-base -mt-2.5 md:mt-0 md:text-[10px] lg:text-sm xl:text-xl 2xl:text-[32px] md:mr-32 lg:mr-40 xl:mr-56 2xl:mr-[440px]">
             (BO® — 08)
@@ -124,15 +123,13 @@ const GetToKnowUs = () => {
         </div>
         <h1
           className="hidden md:inline-block text-[10px] lg:text-sm xl:text-xl 2xl:text-[32px]"
-          ref={(el) => {
-            headingRefs.current[2] = el!;
-          }}
+          ref={(el) => {headingRefs.current[2] = el!}}
         >
           CREATIVE AS BUNDLED PROJECTS
         </h1>
       </div>
 
-      {/* GET TO KNOW US BLOCK */}
+      {/* Hero Section */}
       <div className="mx-4 lg:mx-7 xl:mx-10 flex justify-center items-center flex-col font-bold text-[#1e1e1e] Anton leading-none tracking-[0.2em] md:tracking-[0.3em] xl:tracking-[0.7em] mt-10 xl:mt-16 2xl:mt-28">
         <div className="hidden md:flex items-end gap-4 lg:gap-6">
           <h1 className="uppercase text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px]">
@@ -150,11 +147,11 @@ const GetToKnowUs = () => {
             TO
           </h1>
         </div>
-
         <h1 className="hidden md:block uppercase text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] mt-[-70px] md:mt-[-40px] lg:mt-[-50px] xl:mt-[-70px] 2xl:mt-[-100px]">
           KNOW US
         </h1>
 
+        {/* Mobile Version */}
         <div className="md:hidden flex flex-col items-center">
           <div className="flex gap-4">
             <h1 className="uppercase text-7xl">GET</h1>
@@ -172,8 +169,9 @@ const GetToKnowUs = () => {
         </div>
       </div>
 
-      {/* ARTICLE PREVIEW AND TEXT LINES */}
+      {/* Article and Text Reveal */}
       <div className="flex justify-between flex-col-reverse md:flex-row mx-4 pt-8 md:mx-3 lg:mx-4 xl:mx-6 lg:pt-9 xl:pt-14 2xl:mx-10 2xl:pt-24">
+        {/* Zoomable Image Card */}
         <Link
           href="/"
           ref={imageWrapperRef}
@@ -194,6 +192,7 @@ const GetToKnowUs = () => {
           </div>
         </Link>
 
+        {/* Animated Text Block */}
         <div className="text-left text-[28px] md:text-[26px] lg:text-[36px] xl:text-[50px] 2xl:text-[80px] font-[500] leading-7 lg:leading-9 xl:leading-13 2xl:leading-22 tracking-tight w-[17.5rem] md:w-[26rem] lg:w-[36rem] xl:w-[50rem] 2xl:w-[88rem] 2xl:mr-4">
           {lines.map((line, i) => (
             <div

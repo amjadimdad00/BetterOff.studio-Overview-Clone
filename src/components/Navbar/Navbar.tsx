@@ -6,10 +6,13 @@ import Logo from "@/assets/logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUnderlineAnim } from "@/hooks/useUnderlineAnim";
-import OverlayMenu from "./OverlayMenu";
-import { OverlayMenuHandle } from "./OverlayMenu";
+import OverlayMenu, { OverlayMenuHandle } from "./OverlayMenu";
 
-const Navbar = ({ fadeInUp }) => {
+interface NavbarProps {
+  fadeInUp: (element: HTMLElement | null, delay?: number) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ fadeInUp }) => {
   const navRef = useRef<HTMLElement | null>(null);
   const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const ctaRef = useRef<HTMLAnchorElement | null>(null);
@@ -27,7 +30,7 @@ const Navbar = ({ fadeInUp }) => {
 
   useEffect(() => {
     fadeInUp(navRef.current, 0.4);
-  }, []);
+  }, [fadeInUp]);
 
   return (
     <>
@@ -48,12 +51,13 @@ const Navbar = ({ fadeInUp }) => {
         <ul className="hidden sm:flex sm:space-x-4 lg:space-x-6 xl:space-x-8 2xl:space-x-12 sm:text-[10px] lg:text-[14px] xl:text-[18px] 2xl:text-[32px] sm:pr-8 lg:pr-10 xl:pr-16 2xl:pr-32 tracking-tighter xl:tracking-normal">
           {navLinks.map((link, index) => {
             const isActive = pathname === link.href;
-
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  ref={(el) => (navLinksRef.current[index] = el)}
+                  ref={(el) => {
+                    navLinksRef.current[index] = el;
+                  }}
                   data-active={isActive ? "true" : "false"}
                   className="underline-anim"
                 >
@@ -75,13 +79,16 @@ const Navbar = ({ fadeInUp }) => {
 
         {/* Mobile Menu & Pricing */}
         <div className="sm:hidden flex items-center gap-8 font-medium">
-          <button className="text-[c7c9c1] text-[16px] tracking-tight">
+          <Link
+            href="/pricing"
+            className="text-[#c7c9c1] text-[16px] tracking-tight"
+          >
             Pricing
-          </button>
+          </Link>
 
           <button
             onClick={() => menuRef.current?.open()}
-            className="text-[c7c9c1] text-[16px] tracking-tight"
+            className="text-[#c7c9c1] text-[16px] tracking-tight"
           >
             Menu
           </button>
