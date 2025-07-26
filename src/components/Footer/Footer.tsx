@@ -7,7 +7,16 @@ import { useUnderlineAnim } from "@/hooks/useUnderlineAnim";
 import Marquee from "./Marquee";
 import { GoArrowUp } from "react-icons/go";
 
-const footerData = [
+type FooterLink = {
+  name: string;
+  href: string;
+  external?: boolean;
+};
+
+const footerData: {
+  title: string;
+  links: FooterLink[];
+}[] = [
   {
     title: "Sitemap",
     links: [
@@ -71,7 +80,9 @@ const Footer = () => {
         <div className="flex flex-wrap gap-x-20 gap-y-8 lg:gap-x-26 pt-4 md:pt-16 lg:pt-28">
           {footerData.map((section) => (
             <div key={section.title}>
-              <h5 className={`text-[16px] md:text-[12px] lg:text-[15px] font-medium`}>
+              <h5
+                className={`text-[16px] md:text-[12px] lg:text-[15px] font-medium`}
+              >
                 {section.title}
               </h5>
               <ul className="mt-4 flex flex-col">
