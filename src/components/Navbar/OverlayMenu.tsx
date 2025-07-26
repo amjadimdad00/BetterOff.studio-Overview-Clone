@@ -12,7 +12,12 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/logo.svg";
 
-const OverlayMenu = forwardRef((_, ref) => {
+export interface OverlayMenuHandle {
+  open: () => void;
+  close: () => void;
+}
+
+const OverlayMenu = forwardRef<OverlayMenuHandle>((_, ref) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const borderRefs = useRef<Array<HTMLLIElement | null>>([]);

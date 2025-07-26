@@ -155,7 +155,8 @@ const Benifits = () => {
 
       <div className="flex flex-col sm:flex-row justify-between gap-5 px-4 mt-4 md:px-3 xl:px-6 md:mt-20 lg:px-4 lg:mt-28 xl:mt-40 2xl:mt-68 2xl:px-10">
         <h1 className="text-base md:text-[10px] lg:text-sm xl:text-lg 2xl:text-[33px] md:w-[16%] xl:w-[14%] 2xl:w-[16%] 2xl:leading-10">
-          We've trimmed the fat to focus on essential services at skinny rates.
+          We&apos;ve trimmed the fat to focus on essential services at skinny
+          rates.
         </h1>
 
         <div

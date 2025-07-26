@@ -7,12 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUnderlineAnim } from "@/hooks/useUnderlineAnim";
 import OverlayMenu from "./OverlayMenu";
+import { OverlayMenuHandle } from "./OverlayMenu";
 
 const Navbar = ({ fadeInUp }) => {
   const navRef = useRef<HTMLElement | null>(null);
   const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const ctaRef = useRef<HTMLAnchorElement | null>(null);
-  const menuRef = useRef<any>(null);
+  const menuRef = useRef<OverlayMenuHandle | null>(null);
 
   const pathname = usePathname();
 

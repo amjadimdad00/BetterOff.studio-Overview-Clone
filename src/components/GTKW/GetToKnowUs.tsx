@@ -110,7 +110,7 @@ const GetToKnowUs = () => {
           <span className="text-3xl md:text-lg lg:text-2xl xl:text-4xl 2xl:text-6xl mb-1 2xl:mb-2">
             ●
           </span>
-          what we're about
+          what w&apos;ere about
         </div>
         <div
           className="tracking-tight"

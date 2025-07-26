@@ -79,7 +79,7 @@ const CustomPlanCard: React.FC<CustomPlanCardProps> = ({ item }) => {
 
       <div className="bg-[#fafafa] px-8 pt-5 pb-10 md:px-4 md:pt-3 md:pb-5 lg:px-6 lg:pt-4 lg:pb-6 xl:px-8 xl:pt-10 xl:pb-9.5 2xl:px-14 2xl:pt-16 2xl:pb-16 rounded-b-[1.2rem] border-t border-[#dce4e5]">
         <h5 className="text-base md:text-[10px] lg:text-[14px] xl:text-[18px] 2xl:text-[32px] font-medium mb-5 md:mb-3 xl:mb-5 2xl:mb-8">
-          What's included
+          What&apos;s included
         </h5>
         <ul className="flex flex-col gap-y-2 md:gap-y-1 lg:gap-y-2 xl:gap-y-3 2xl:gap-y-5 text-[15px] lg:text-[12px] xl:text-[17px] md:text-[10px] 2xl:text-[28px] text-gray-900">
           {item.features.map((feature, idx) => (

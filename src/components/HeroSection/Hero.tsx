@@ -39,7 +39,7 @@ const Hero: React.FC<HeroProps> = ({
     "Better Off®.",
   ];
 
-  function mergeRefs<T = any>(
+  function mergeRefs<T>(
     ...refs: (React.Ref<T> | undefined)[]
   ): React.RefCallback<T> {
     return (element: T) => {

@@ -328,7 +328,7 @@ export default function Home() {
       if (finalTexts.length > 0)
         staggerOnScroll(finalTexts, finalBlockRef.current);
     }
-
+    
     // Creative animations
     if (creativeHeadingRef.current) fadeInOnScroll(creativeHeadingRef.current);
     if (creativeRightRef.current) fadeInOnScroll(creativeRightRef.current);
