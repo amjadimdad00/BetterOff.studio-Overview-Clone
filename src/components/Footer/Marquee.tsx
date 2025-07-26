@@ -91,22 +91,24 @@ const Marquee = () => {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden pt-10 md:pt-6 select-none max-w-screen"
+      className="overflow-hidden pt-10 md:pt-6 xl:pt-9 2xl:pt-18 select-none max-w-screen"
     >
-      <div className="flex whitespace-nowrap items-center gap-8 md:gap-6">
+      <div className="flex whitespace-nowrap items-center gap-8 md:gap-6 2xl:gap-12">
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="marquee-item flex items-center gap-6 text-[160px] md:text-[200px] lg:text-[280px] font-black uppercase leading-none text-white Anton pointer-events-none"
+            className="marquee-item flex items-center gap-6 2xl:gap-12 text-[160px] md:text-[200px] lg:text-[280px] xl:text-[390px] 2xl:text-[650px] font-black uppercase leading-none text-white Anton pointer-events-none"
           >
             {/* Cycling Images */}
-            <div className="relative w-[160px] h-[160px] md:h-[200px] md:w-[200px] lg:w-[284px] lg:h-[284px] shrink-0">
+            <div className="relative w-[160px] h-[160px] md:h-[200px] md:w-[200px] lg:w-[284px] lg:h-[284px] xl:w-[408px] xl:h-[408px] 2xl:w-[666px] 2xl:h-[666px] shrink-0">
               {cyclingImages.map((img, j) => (
                 <img
+                  width={100}
+                  height={100}
                   key={j}
                   src={img.src}
                   alt={`icon-${j}`}
-                  className="cycling-image absolute top-[-8px] lg:top-[-14px] left-0 w-full h-full object-contain"
+                  className="cycling-image absolute top-[-8px] lg:top-[-14px] xl:top-[-20px] 2xl:top-[-32px] left-0 w-full h-full object-contain"
                 />
               ))}
             </div>

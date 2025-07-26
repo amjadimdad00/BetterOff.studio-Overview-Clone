@@ -3,17 +3,17 @@ import { RefObject, useEffect } from "react";
 import gsap from "gsap";
 
 export function useUnderlineAnim(
-  linkElements: (HTMLAnchorElement | null)[],
-  primaryCTARef: RefObject<HTMLAnchorElement | null>
+  linkElements: (HTMLAnchorElement | null)[] = [],
+  primaryCTARef: RefObject<HTMLAnchorElement>
 ) {
   useEffect(() => {
-    // ✅ Extract element safely
     const primaryCTA = primaryCTARef.current;
 
-    // ✅ Hover underline for nav links (if any)
-    if (Array.isArray(linkElements) && linkElements.length > 0) {
+    // ✅ Animate hover underline for links
+    if (Array.isArray(linkElements)) {
       linkElements.forEach((el) => {
-        if (!el || el.dataset.active === "true") return;
+        if (!(el instanceof HTMLElement) || el.dataset?.active === "true")
+          return;
 
         const hoverTimeline = gsap.timeline({ paused: true });
 

@@ -2,6 +2,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import "tailwindcss";
 
+@font-face {
+  font-family: pp;
+  src: url(/font/PPNeueMontreal-Medium.88ee7c9.otf),
+    url(/font/PPNEUEMONTREAL-MEDIUM.88EE7C9.woff2);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: ff;
+  src: url(/font/founder.TTF);
+  font-weight: normal;
+  font-style: normal;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }

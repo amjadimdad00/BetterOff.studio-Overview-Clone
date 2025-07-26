@@ -212,7 +212,7 @@ const Testimonials = () => {
     }, [activeIndex]);
 
     return () => ctx.revert();
-  }, [activeIndex]);
+  }, [active.quote.length, activeIndex]);
 
   useEffect(() => {
     if (!imageRef.current) return;

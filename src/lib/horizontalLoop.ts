@@ -61,7 +61,7 @@ export default function horizontalLoop(
   gsap.set(elements, { x: 0 });
 
   const totalWidth =
-    elements.reduce((acc, el, i) => {
+    elements.reduce((acc, el) => {
       const scaleX = (gsap.getProperty(el, "scaleX") as number) || 1;
       return acc + el.offsetWidth * scaleX + paddingRight;
     }, 0) || 1;

@@ -25,7 +25,7 @@ const benefitsData = [
     number: "(02)",
     title: "Tap previously unattainable talent",
     description:
-      "We’ve already vetted and assembled the most elite roster of specialists out there. Simply plug into our power outlet to crank up your brand.",
+      "We've already vetted and assembled the most elite roster of specialists out there. Simply plug into our power outlet to crank up your brand.",
   },
   {
     number: "(03)",
@@ -37,19 +37,19 @@ const benefitsData = [
     number: "(04)",
     title: "Endless revisions are the ultimate flex",
     description:
-      "Free yourself from restrictive change order fees! We are committed to polishing your project until you think it’s shiny and perfect.",
+      "Free yourself from restrictive change order fees! We are committed to polishing your project until you think it's shiny and perfect.",
   },
   {
     number: "(05)",
     title: "Fast turnarounds, not idle runarounds",
     description:
-      "By trimming fat from the bloated agency process, we’re able to meet deadlines at turn rates that average days not weeks.",
+      "By trimming fat from the bloated agency process, we're able to meet deadlines at turn rates that average days not weeks.",
   },
   {
     number: "(06)",
     title: "Our thinking sets us apart",
     description:
-      "Every partnership comes with the strategic brainpower you’d expect from three decades of combined branding experience.",
+      "Every partnership comes with the strategic brainpower you'd expect from three decades of combined branding experience.",
   },
 ];
 
@@ -57,6 +57,10 @@ const Benifits = () => {
   const topTextRef = useRef<HTMLDivElement>(null);
   const bottomTextRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const creativeRef = useRef<HTMLHeadingElement>(null);
+  const withRef = useRef<HTMLDivElement>(null);
+  const noFluffRef = useRef<HTMLHeadingElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const [randomImage, setRandomImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -68,33 +72,81 @@ const Benifits = () => {
     if (typeof window === "undefined") return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      // Master timeline that triggers when section comes into view
+      const masterTL = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
           once: true,
         },
-        defaults: { ease: "power2.out", duration: 0.7 },
       });
 
+      // Top text animation
       if (topTextRef.current) {
-        tl.from(topTextRef.current.children, {
+        masterTL.from(topTextRef.current.children, {
           y: 30,
           opacity: 0,
           stagger: 0.05,
+          duration: 0.7,
+          ease: "power2.out",
         });
       }
 
+      // Creative text animation
+      if (creativeRef.current) {
+        masterTL.from(
+          creativeRef.current,
+          {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.3"
+        );
+      }
+
+      // With + Image animation
+      if (withRef.current) {
+        masterTL.from(
+          withRef.current,
+          {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.5"
+        );
+      }
+
+      // No Fluff text animation
+      if (noFluffRef.current) {
+        masterTL.from(
+          noFluffRef.current,
+          {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.5"
+        );
+      }
+
+      // Bottom benefits animation
       if (bottomTextRef.current) {
         const q = gsap.utils.selector(bottomTextRef);
-        tl.from(
+        masterTL.from(
           q(".benefit-card"),
           {
             y: 20,
             opacity: 0,
-            stagger: 0.3,
+            stagger: 0.2,
+            duration: 0.7,
+            ease: "power2.out",
           },
-          "-=0.5"
+          "-=0.3"
         );
       }
     }, sectionRef);
@@ -128,35 +180,44 @@ const Benifits = () => {
       </div>
 
       <div className="mx-4 lg:mx-7 xl:mx-10 flex justify-center items-center gap-16 md:gap-10 lg:gap-6 xl:gap-0 flex-col font-bold text-[#1e1e1e] Anton leading-none tracking-[0.2em] md:tracking-[0.3em] xl:tracking-[0.7em] mt-10 xl:mt-32">
-        <h1 className="uppercase leading-none m-0 p-0 text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] w-full text-center">
+        <h1
+          ref={creativeRef}
+          className="uppercase leading-none m-0 p-0 text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] w-full text-center"
+        >
           CREATIVE
         </h1>
 
-        <div className="w-full flex justify-start">
-          <h1 className="uppercase leading-none mt-[-70px] text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] flex gap-2 items-center">
+        <div className="w-full flex justify-start gap-4 items-center mt-[-70px]">
+          <h1
+            ref={withRef}
+            className="uppercase leading-none text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px]"
+          >
             WITH
-            {randomImage && (
-              <Image
-                src={randomImage}
-                alt="Random Visual"
-                width={90}
-                height={90}
-                className="object-contain mb-2.5 md:w-52 lg:w-72 xl:w-[420px] 2xl:w-[660px] md:mb-5 lg:mb-7 xl:mb-10 2xl:mb-16"
-                priority
-              />
-            )}
           </h1>
+          {randomImage && (
+            <Image
+              ref={imageRef}
+              src={randomImage}
+              alt="Random Visual"
+              width={300}
+              height={300}
+              className="object-contain mb-2.5 md:w-52 lg:w-72 xl:w-[420px] 2xl:w-[660px] md:mb-5 lg:mb-7 xl:mb-10 2xl:mb-16"
+              priority
+            />
+          )}
         </div>
 
-        <h1 className="uppercase leading-none mt-[-70px] text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] w-full text-center">
+        <h1
+          ref={noFluffRef}
+          className="uppercase leading-none mt-[-70px] text-[90px] md:text-[220px] lg:text-[290px] xl:text-[420px] 2xl:text-[650px] w-full text-center"
+        >
           NO FLUFF
         </h1>
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between gap-5 px-4 mt-4 md:px-3 xl:px-6 md:mt-20 lg:px-4 lg:mt-28 xl:mt-40 2xl:mt-68 2xl:px-10">
         <h1 className="text-base md:text-[10px] lg:text-sm xl:text-lg 2xl:text-[33px] md:w-[16%] xl:w-[14%] 2xl:w-[16%] 2xl:leading-10">
-          We&apos;ve trimmed the fat to focus on essential services at skinny
-          rates.
+          We&apos;ve trimmed the fat to focus on essential services at skinny rates.
         </h1>
 
         <div

@@ -7,8 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const useRevealLinesOnScroll = (
   refs: React.RefObject<HTMLElement[]> | HTMLElement[],
   trigger: HTMLElement | null,
-  start = "top 85%",
-  offset = 0
+  start = "top 85%"
 ) => {
   useLayoutEffect(() => {
     if (!trigger || !refs) return;
@@ -28,5 +27,5 @@ export const useRevealLinesOnScroll = (
     }, trigger);
 
     return () => ctx.revert();
-  }, [refs, trigger]);
+  }, [refs, trigger, start]);
 };

@@ -15,7 +15,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ fadeInUp }) => {
   const navRef = useRef<HTMLElement | null>(null);
   const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
-  const ctaRef = useRef<HTMLAnchorElement | null>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null!);
   const menuRef = useRef<OverlayMenuHandle | null>(null);
 
   const pathname = usePathname();
@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ fadeInUp }) => {
 
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 w-full z-50 flex justify-between items-center p-[15px] lg:px-[16px] lg:py-[20px] xl:px-[24px] xl:py-[28px] 2xl:px-[40px] 2xl:py-[48px] selection:bg-[#1e1e1e] text-[#c7c9c1] mix-blend-difference overflow-hidden max-w-screen"
+        className="fixed top-0 left-0 w-full z-[99999] flex justify-between items-center p-[15px] lg:px-[16px] lg:py-[20px] xl:px-[24px] xl:py-[28px] 2xl:px-[40px] 2xl:py-[48px] selection:bg-[#1e1e1e] text-[#c7c9c1] mix-blend-difference overflow-hidden max-w-screen"
       >
         {/* Logo */}
         <Image
